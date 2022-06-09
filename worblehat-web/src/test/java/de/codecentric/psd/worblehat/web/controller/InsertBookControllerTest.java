@@ -79,9 +79,6 @@ class InsertBookControllerTest {
         bindingResult.getGlobalErrors(),
         hasItem(hasProperty("codes", hasItemInArray("duplicateIsbn"))));
     assertThat(navigateTo, is("insertBooks"));
-    assertThat(
-      bindingResult.getGlobalErrors(),
-      hasItem(hasProperty("codes", hasItemInArray("yearInFuture"))));
   }
 
   private void verifyBookIsCreated() {
