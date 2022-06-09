@@ -4,6 +4,7 @@ import de.codecentric.psd.worblehat.domain.Book;
 import de.codecentric.psd.worblehat.domain.BookService;
 import de.codecentric.psd.worblehat.web.formdata.BookDataFormData;
 import java.util.Optional;
+import java.util.Set;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,11 @@ public class InsertBookController {
     if (result.hasErrors()) {
       return "insertBooks";
     } else {
+      if(isDuplicateBookPresent(bookDataFormData)) {
+        result.reject("isbnForEdition");
+        return "insertBooks";
+      }
+
       Optional<Book> book =
           bookService.createBook(
               bookDataFormData.getTitle(),
@@ -60,5 +66,11 @@ public class InsertBookController {
       }
       return "redirect:bookList";
     }
+  }
+
+  private boolean isDuplicateBookPresent(BookDataFormData bookDataFormData) {
+    Set<Book> books = bookService.findBooksByIsbn(bookDataFormData.getIsbn());
+    return books.stream().filter((Book book) ->
+      book.getAuthor() == bookDataFormData.getAuthor() && book.getTitle() == bookDataFormData.getTitle() && book.getEdition() != bookDataFormData.getEdition()).findFirst().isPresent();
   }
 }
