@@ -19,7 +19,6 @@ import org.mockito.Mock;
 
 class StandardBookServiceTest {
 
-
   @Mock private BorrowingRepository borrowingRepository;
 
   @Mock private BookRepository bookRepository;
@@ -70,7 +69,8 @@ class StandardBookServiceTest {
       }
       bookCopies.get(book.getIsbn()).add(book);
     }
-    // in case save is called on the repository, it should return something meaningful instead of null
+    // in case save is called on the repository, it should return something meaningful instead of
+    // null
     when(bookRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg());
     for (Map.Entry<String, Set<Book>> entry : bookCopies.entrySet()) {
       when(bookRepository.findByIsbn(entry.getKey())).thenReturn(entry.getValue());
