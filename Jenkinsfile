@@ -97,15 +97,15 @@ pipeline {
 
                 post {
                     always {
-                        archiveArtifacts artifacts: 'worblehat-acceptancetests/target/*.flv', fingerprint: true
+                        archiveArtifacts allowEmptyArchive: true, artifacts: 'worblehat-acceptancetests/target/*.flv', fingerprint: true
                         cucumber buildStatus: 'FAILURE',
-                            failedFeaturesNumber: 1,
-                            failedScenariosNumber: 1,
-                            skippedStepsNumber: 1,
-                            failedStepsNumber: 1,
-                            fileIncludePattern: '**/target/cucumber-report.json',
-                            sortingMethod: 'ALPHABETICAL',
-                            trendsLimit: 100
+                        failedFeaturesNumber: 1,
+                        failedScenariosNumber: 1,
+                        skippedStepsNumber: 1,
+                        failedStepsNumber: 1,
+                        fileIncludePattern: '**/target/cucumber-report.json',
+                        sortingMethod: 'ALPHABETICAL',
+                        trendsLimit: 100
                     }
                 }
             }
