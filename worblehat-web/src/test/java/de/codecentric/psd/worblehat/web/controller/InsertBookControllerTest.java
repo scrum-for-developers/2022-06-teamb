@@ -10,7 +10,6 @@ import de.codecentric.psd.worblehat.domain.BookService;
 import de.codecentric.psd.worblehat.web.formdata.BookDataFormData;
 import java.util.HashMap;
 import java.util.Optional;
-import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ModelMap;
@@ -52,24 +51,6 @@ class InsertBookControllerTest {
     bindingResult.addError(new ObjectError("", ""));
 
     String navigateTo = insertBookController.processSubmit(bookDataFormData, bindingResult);
-
-    assertThat(navigateTo, is("insertBooks"));
-  }
-
-  @Test
-  void shouldRejectOnDuplicateBook() {
-    when(bookService.findBooksByIsbn(any())).thenReturn(Set.of(TEST_BOOK));
-
-    bookDataFormData.setIsbn("isbn");
-    bookDataFormData.setTitle("title");
-    bookDataFormData.setAuthor("author");
-    bookDataFormData.setYearOfPublication("2016");
-    bookDataFormData.setEdition("otherEdition");
-    String navigateTo = insertBookController.processSubmit(bookDataFormData, bindingResult);
-
-    assertThat(
-        bindingResult.getGlobalErrors(),
-        hasItem(hasProperty("codes", hasItemInArray("isbnForEdition"))));
 
     assertThat(navigateTo, is("insertBooks"));
   }

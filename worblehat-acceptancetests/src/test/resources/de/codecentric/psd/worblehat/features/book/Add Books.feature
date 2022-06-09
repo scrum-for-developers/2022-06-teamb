@@ -41,8 +41,17 @@ Feature: Adding a new book to the library
             | Sourcery | Terry Pratchett | 1       | 1989 | 0552131075 | XX_DIFFERENT_AUTHOR_XX | Sourcery             | 1  |
             | Sourcery | Terry Pratchett | 1       | 1989 | 0552131075 | Terry Pratchett        | XX_DIFERENT_TITLE_XX | 1  |
 
+    Scenario Outline: There should be no multiple copies of the same book with the same ISBN and different edition
 
+        Given an empty library
 
+        When a librarian adds a book with "<title>", "<author>", <edition>, "<year>" and "<isbn>"
+        And a librarian adds another book with "<title>", "<author>", <edition2>, "<year>" and "<isbn>"
 
+        Then the booklist contains a book with "<title>", "<author>", "<year>", <edition> and "<isbn>"
+        And the library contains <nr> copies of the book with "<isbn>"
 
+        Examples:
 
+            | title    | author          | edition | year | isbn       | edition2         | nr |
+            | Sourcery | Terry Pratchett | 1       | 1989 | 0552131075 | 2                | 1  |
