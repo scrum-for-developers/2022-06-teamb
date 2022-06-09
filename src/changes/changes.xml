@@ -29,6 +29,7 @@
 			description="Das UX für die Eingabe verbessern">
 			<action dev="gekko" type="update">
         Added email validation.
+        Added release date validation must be in past or present.
 			</action>
 		</release>
 	</body>
