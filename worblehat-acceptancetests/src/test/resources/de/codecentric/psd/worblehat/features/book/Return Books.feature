@@ -18,3 +18,18 @@ Feature: Returning - giving back - borrowed books
       | user1@dings.com | 0321293533            | user2@dings.com | 1234567962            |
       | user1@dings.com | 0321293533 1234567962 |                 |                       |
       | user1@dings.com | 0321293533 1234567962 | user2@dings.com | 7784484156 1126108624 |
+
+  Scenario Outline: Returning book with whitespace in email is valid
+
+    Given an empty library
+    And "<borrower>" has borrowed books "<isbns>"
+
+    When " <borrower> " returns all books
+
+    Then books "<isbns>" are not borrowed anymore by borrower "<borrower>"
+
+    Examples:
+
+      | borrower       | isbns                  |
+      | user1@dings.com | 0321293533            |
+      | user1@dings.com | 0321293533 1234567962 |

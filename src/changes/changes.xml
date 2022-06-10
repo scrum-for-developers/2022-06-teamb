@@ -39,8 +39,12 @@
         Edition
       </action>
       <action dev="gekko" type="update">
-        Entfernen von Leerstellen am Anfang und Ende bei dem Auleihen eines Buches bei den Feldern  ISBN und
+        Entfernen von Leerstellen am Anfang und Ende bei dem Auleihen eines Buches bei den Feldern ISBN und
         Email
+      </action>
+
+      <action dev="gekko" type="update">
+        Entfernen von Leerstellen am Anfang und Ende bei dem Zurückgeben eines Buches bei dem Feld Email
       </action>
     </release>
 	</body>
