@@ -40,14 +40,14 @@ public class Library {
     doWithEach(
         isbns,
         (isbn) -> {
-          Book book = DemoBookFactory.createDemoBook().withISBN(isbn).build();
+          DemoBook book = DemoBookFactory.createDemoBook().withISBN(isbn).build();
           bookService
               .createBook(
                   book.getTitle(),
                   book.getAuthor(),
                   book.getEdition(),
                   isbn,
-                  book.getYearOfPublication())
+                  Integer.parseInt(book.getYearOfPublication()))
               .orElseThrow(IllegalStateException::new);
         });
   }
@@ -57,14 +57,14 @@ public class Library {
     doWithEach(
         isbns,
         (isbn) -> {
-          Book book = DemoBookFactory.createDemoBook().withISBN(isbn).build();
+          DemoBook book = DemoBookFactory.createDemoBook().withISBN(isbn).build();
           bookService
               .createBook(
                   book.getTitle(),
                   book.getAuthor(),
                   book.getEdition(),
                   isbn,
-                  book.getYearOfPublication())
+                  Integer.parseInt(book.getYearOfPublication()))
               .orElseThrow(IllegalStateException::new);
 
           bookService.borrowBook(book.getIsbn(), borrower);

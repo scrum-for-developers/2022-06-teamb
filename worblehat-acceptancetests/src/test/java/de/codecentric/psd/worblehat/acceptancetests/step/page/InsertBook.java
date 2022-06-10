@@ -7,8 +7,8 @@ import de.codecentric.psd.worblehat.acceptancetests.adapter.SeleniumAdapter;
 import de.codecentric.psd.worblehat.acceptancetests.adapter.wrapper.Page;
 import de.codecentric.psd.worblehat.acceptancetests.adapter.wrapper.PageElement;
 import de.codecentric.psd.worblehat.acceptancetests.step.StoryContext;
+import de.codecentric.psd.worblehat.acceptancetests.step.business.DemoBook;
 import de.codecentric.psd.worblehat.acceptancetests.step.business.DemoBookFactory;
-import de.codecentric.psd.worblehat.domain.Book;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class InsertBook {
     seleniumAdapter.gotoPage(Page.INSERTBOOKS);
     fillInsertBookForm(title, author, edition, isbn, year);
     seleniumAdapter.clickOnPageElement(PageElement.ADDBOOKBUTTON);
-    context.put("LAST_INSERTED_BOOK_ISBN", isbn);
+    context.put("LAST_INSERTED_BOOK_ISBN", isbn.trim());
   }
 
   @When("a librarian adds a random book and the {string} of that book is {string}")
@@ -59,10 +59,11 @@ public class InsertBook {
         randomBookBuilder.withISBN(value);
         break;
     }
-    Book randomBook = randomBookBuilder.build();
+
+    DemoBook randomBook = randomBookBuilder.build();
     fillInsertBookForm(randomBook);
     seleniumAdapter.clickOnPageElement(PageElement.ADDBOOKBUTTON);
-    context.put("LAST_INSERTED_BOOK_ISBN", randomBook.getIsbn());
+    context.put("LAST_INSERTED_BOOK_ISBN", randomBook.getIsbn().trim());
   }
 
   // *****************
@@ -77,13 +78,13 @@ public class InsertBook {
   // *** U T I L *****
   // *****************
 
-  private void fillInsertBookForm(Book aBook) {
+  private void fillInsertBookForm(DemoBook aBook) {
     fillInsertBookForm(
         aBook.getTitle(),
         aBook.getAuthor(),
         Integer.parseInt(aBook.getEdition()),
         aBook.getIsbn(),
-        Integer.toString(aBook.getYearOfPublication()));
+        aBook.getYearOfPublication());
   }
 
   private void fillInsertBookForm(

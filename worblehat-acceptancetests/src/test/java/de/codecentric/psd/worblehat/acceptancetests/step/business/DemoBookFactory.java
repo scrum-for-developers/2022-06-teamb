@@ -1,13 +1,12 @@
 package de.codecentric.psd.worblehat.acceptancetests.step.business;
 
-import de.codecentric.psd.worblehat.domain.Book;
 
 public class DemoBookFactory {
 
-  private Book book;
+  private DemoBook book;
 
   private DemoBookFactory() {
-    this.book = new Book("A book title", "A book author", "1", "123456789X", 2013);
+    this.book = new DemoBook("A book title", "A book author", "1", "123456789X", "2013");
   }
 
   public static DemoBookFactory createDemoBook() {
@@ -35,16 +34,11 @@ public class DemoBookFactory {
   }
 
   public DemoBookFactory withYearOfPublication(String year) {
-    this.book.setYearOfPublication(Integer.parseInt(year));
+    this.book.setYearOfPublication(year);
     return this;
   }
 
-  public DemoBookFactory withYearOfPublication(int yearOfPublication) {
-    this.book.setYearOfPublication(yearOfPublication);
-    return this;
-  }
-
-  public Book build() {
+  public DemoBook build() {
     return book;
   }
 }

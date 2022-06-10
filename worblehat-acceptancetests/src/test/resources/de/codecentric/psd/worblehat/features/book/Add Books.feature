@@ -23,6 +23,19 @@ Feature: Adding a new book to the library
 
       Then the booklist shows that book with "title" as "  X  "
 
+    Scenario Outline: You can add ISBN, YEAR, EDITION, AUTHOR with whitespaces (pre, post)
+      Given an empty library
+
+      When a librarian adds a random book and the "<property>" of that book is " <value> "
+
+      Then the booklist shows that book with "<property>" as "<value>"
+
+      Examples:
+        | property | value           |
+        | edition  | 1               |
+        | author   | Terry Pratchett |
+        | year     | 1989            |
+        | isbn     | 123456789X      |
 
     Scenario Outline: There can be multiple copies of the same book with the same ISBN
 
