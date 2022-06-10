@@ -14,3 +14,17 @@ Feature: Borrowing borrowed and available books
             | allIsbn                          | user          | borrowedIsbns | message                       |
             | 0552131075 0321293533 1234567962 | user@test.com | 1234567962    | The book is already borrowed. |
 
+
+  Scenario Outline: You can add isbn and email with whitespaces to borrowed a book
+
+    Given a library, containing only books with isbns "<allIsbn>"
+
+    When " <user> " borrows the books " <borrowedIsbns> "
+
+    Then books "<borrowedIsbns>" are borrowed by borrower "<user>"
+
+    Examples:
+
+      | allIsbn                          | user          | borrowedIsbns |
+      | 0552131075 0321293533 1234567962 | user@test.com | 1234567962    |
+

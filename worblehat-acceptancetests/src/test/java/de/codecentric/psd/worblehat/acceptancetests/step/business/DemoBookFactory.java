@@ -1,6 +1,5 @@
 package de.codecentric.psd.worblehat.acceptancetests.step.business;
 
-
 public class DemoBookFactory {
 
   private DemoBook book;

@@ -93,7 +93,7 @@ public class BookList {
             assertThat(htmlBookList.getBookByIsbn(isbn).getBorrower(), is(isEmptyOrNullString())));
   }
 
-  @Then("books {string} are still borrowed by borrower {string}")
+  @Then("books {string} are( still) borrowed by borrower {string}")
   public void booksAreStillBorrowedByBorrower2(String isbns, String borrower2) {
     seleniumAdapter.gotoPage(Page.BOOKLIST);
     HtmlBookList htmlBookList = seleniumAdapter.getTableContent(PageElement.BOOKLIST);

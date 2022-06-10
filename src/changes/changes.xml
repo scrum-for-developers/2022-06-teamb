@@ -38,6 +38,10 @@
         Entfernen von Leerstellen am Anfang und Ende bei Anlage eines Buches bei den Feldern Jahr, Autor, ISBN und
         Edition
       </action>
+      <action dev="gekko" type="update">
+        Entfernen von Leerstellen am Anfang und Ende bei dem Auleihen eines Buches bei den Feldern  ISBN und
+        Email
+      </action>
     </release>
 	</body>
 </document>
